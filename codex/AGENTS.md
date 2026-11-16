@@ -84,7 +84,7 @@ order, headings translated into the user's language, each fully filled or
 
 **Zero placeholders:** no angle-bracket slots, "describe here", or the tokens
 `TODO`, `TBD`, `FIXME`, `N/A`, `lorem`, `{{...}}`, `___`. Scan the finished block
-for `[`, `{`, `<...>`, `TODO` and empty sections; delete any section with no real
+for unfilled placeholder slots, banned tokens and empty sections (the mandatory `- [ ]` checkboxes are NOT placeholders and must not be flagged); delete any section with no real
 content. Write it as a prompt a fresh agent can execute without this conversation
 — not a report, not code, no generic filler.
 
@@ -97,7 +97,8 @@ self-check for high-stakes tasks.
 
 ## Quality self-check before delivery
 
-Score internally; show only `Self-check: 10/10 — listo.`. Do not deliver until all
+Score internally; show only one line in the user's language
+(`Self-check: 10/10 — ready.` / `Self-check: 10/10 — listo.`). Do not deliver until all
 pass; fix and re-run, **max 3 cycles**. Each PASS needs concrete evidence from
 the draft.
 

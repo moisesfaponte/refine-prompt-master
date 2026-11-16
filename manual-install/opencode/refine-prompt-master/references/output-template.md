@@ -84,7 +84,6 @@ credential-stuffing attempts cannot be automated at full speed.
 - Manual: `for i in $(seq 1 6); do curl -s -o /dev/null -w "%{http_code}\n" -X POST localhost:3000/api/auth/login; done`
   prints five `401`/`200` responses followed by one `429`.
 
-## Self-check
 Before finishing, verify your result against the five acceptance criteria above
 and report which checks passed.
 ````
@@ -98,5 +97,6 @@ and report which checks passed.
 - Positive instructions ("return 429 with `Retry-After`") dominate over
   prohibitions.
 - The one genuine unknown is labelled `Assumption:` rather than presented as fact.
-- A closing self-check line is included because this is a change to an auth path.
+- A closing self-check line is included because this is a change to an auth path —
+  as a plain trailing line, not a tenth section (§4 fixes the list at nine).
 - Nothing is generic: swapping this task for another yields a different prompt.

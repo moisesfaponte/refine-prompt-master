@@ -2,9 +2,11 @@
 
 Load this file at Step 3 / §6. Score internally. A PASS requires **concrete
 evidence quoted from the draft**, never a feeling ("looks good" is not a PASS).
-Show the user only a one-line summary such as `Self-check: 10/10 — listo.`.
+Show the user only a one-line summary **in the user's language**, e.g.
+`Self-check: 10/10 — ready.` (English) or `Self-check: 10/10 — listo.` (Spanish).
 
-Score each gate 0 (fail) / 1 (partial) / 2 (pass). Deliver only at **20/20**.
+Each gate is PASS or FAIL. Deliver only at **10/10** — the same scale shown in
+the one-line summary and in `SKILL.md` §6.
 Run the loop at most **3** times: draft → rubric → fix → re-run. If a gate still
 fails after 3 cycles, deliver the best version, name the failing gate openly,
 and stop.
@@ -12,7 +14,7 @@ and stop.
 | Gate | PASS evidence to quote | Typical FAIL |
 |---|---|---|
 | **G1 Grounding** | Each Context bullet cites a real path you read, e.g. "tests use Vitest (`vitest.config.ts`)"; inferences labelled `Assumption:`. | "The project uses Jest" when `package.json` lists Vitest. |
-| **G2 No placeholders** | A mechanical scan of the block finds zero `[...]`, `{...}`, `<describe here>`, `___`, `{{...}}`, `TODO`, `TBD`, `FIXME`, `N/A`, and no empty section. | `## Constraints\n- TBD`. |
+| **G2 No placeholders** | A mechanical scan of the block finds zero `[...]`, `{...}`, `<describe here>`, `___`, `{{...}}`, `TODO`, `TBD`, `FIXME`, `N/A`, and no empty section; the required `- [ ]` checkboxes are exempt. | `## Constraints\n- TBD`. |
 | **G3 Completeness** | Objective, Scope (with `Out-of-scope:`), Deliverables, Acceptance criteria and Verification all present and filled. | Missing out-of-scope; criteria written as prose, not `- [ ]`. |
 | **G4 Verifiable** | Each `- [ ]` criterion maps to a named command/check in Verification. | Criterion "works correctly" with only "run the tests". |
 | **G5 One round** | Exactly one `question` call or one numbered list, or an explicit "No clarification needed". | Two separate question calls; asking for the test command that is in `package.json`. |

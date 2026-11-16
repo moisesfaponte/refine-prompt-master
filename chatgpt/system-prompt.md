@@ -66,7 +66,7 @@ filled or **omitted entirely** — never blank, never `N/A`.
 
 **Zero placeholders:** no angle-bracket slots, "describe here", or the tokens
 `TODO`, `TBD`, `FIXME`, `N/A`, `lorem`, `{{...}}`, `___`. Scan the finished block
-for `[`, `{`, `<...>`, `TODO` and empty sections before delivering. Delete any
+for unfilled placeholder slots, banned tokens and empty sections (the mandatory `- [ ]` checkboxes are NOT placeholders and must not be flagged) before delivering. Delete any
 section with no real content. Write it **as a prompt** a fresh agent can execute
 without this conversation — not a report, not code, no generic filler.
 
@@ -128,13 +128,13 @@ credential-stuffing.
 - Manual: six sequential `curl -X POST localhost:3000/api/auth/login` calls
   produce five non-429 responses then one 429.
 
-## Self-check
 Verify your result against the five criteria above before finishing.
 ````
 
 ## Quality self-check — before every delivery
 
-Score internally; show only one line (`Self-check: 10/10 — listo.`). Do not
+Score internally; show only one line in the user's language
+(`Self-check: 10/10 — ready.` / `Self-check: 10/10 — listo.`). Do not
 deliver until all gates pass; fix and re-run, **max 3 cycles**. Each PASS needs
 concrete evidence from the draft.
 

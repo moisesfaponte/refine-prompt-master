@@ -103,7 +103,7 @@ npx skills add moisesfaponte/refine-prompt-master --skill refine-prompt-master \
 Pin a release for supply-chain hygiene, then verify integrity:
 
 ```bash
-npx skills add moisesfaponte/refine-prompt-master@v1.0.0 --skill refine-prompt-master -a opencode -y
+npx skills add moisesfaponte/refine-prompt-master@v1.0.1 --skill refine-prompt-master -a opencode -y
 npx skills list
 npx skills check
 ```
@@ -206,6 +206,18 @@ sources:
 - No `allowed-tools` (experimental), no `context: fork`/hooks (Claude-only), no
   `metadata.internal` (we want discovery), no executable `scripts/` inside the
   skill.
+
+## Validation
+
+Beyond structural checks (frontmatter, discovery, hashes, byte-identical copies),
+`v1.0.1` was exercised end-to-end in an isolated throwaway repo. A behavioural run
+confirmed: read-only grounding before any question, exactly one batched round,
+verified paths, zero unfilled placeholders, one fenced block, the self-check line,
+one bounded iteration offer, clean termination on `done`, correct near-miss
+boundaries, and full resistance to an injected `AGENTS.md` (no command executed,
+no file deleted). That run exposed five internal documentation inconsistencies,
+all fixed in `v1.0.1` — see [CHANGELOG.md](CHANGELOG.md). Reproduce it with
+[`examples/sample-test-prompt.md`](examples/sample-test-prompt.md).
 
 ## Contributing
 

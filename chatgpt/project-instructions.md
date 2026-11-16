@@ -71,7 +71,7 @@ order, headings translated into the user's language, each fully filled or
 
 **Zero placeholders:** no angle-bracket slots, "describe here", or the tokens
 `TODO`, `TBD`, `FIXME`, `N/A`, `lorem`, `{{...}}`, `___`. Scan the finished block
-for `[`, `{`, `<...>`, `TODO` and empty sections; delete any section with no real
+for unfilled placeholder slots, banned tokens and empty sections (the mandatory `- [ ]` checkboxes are NOT placeholders and must not be flagged); delete any section with no real
 content. Write it as a prompt a fresh agent can execute without this conversation
 — not a report, not code, no generic filler. Be clear and direct, say what to do
 rather than what to avoid, explain the *why* of at least one constraint, keep
@@ -81,7 +81,8 @@ high-stakes tasks.
 
 ## Self-check, iteration, termination
 
-Score internally; show only `Self-check: 10/10 — listo.`. Gates: G1 grounding with
+Score internally; show only one line in the user's language
+(`Self-check: 10/10 — ready.` / `Self-check: 10/10 — listo.`). Gates: G1 grounding with
 citations, G2 no placeholders, G3 completeness (Objective, Scope with
 out-of-scope, Deliverables, Acceptance criteria, Verification), G4 each criterion
 maps to a verification check, G5 exactly one round, G6 language mirror, G7 no
