@@ -1,0 +1,46 @@
+{
+  "skill": "refine-prompt-master",
+  "purpose": "Trigger evals for the frontmatter `description`. Method follows https://agentskills.io/skill-creation/optimizing-descriptions.md",
+  "method": {
+    "runs_per_query": 3,
+    "trigger_rate_threshold": 0.5,
+    "train_split": 0.6,
+    "validation_split": 0.4,
+    "max_iterations": 5,
+    "selection_rule": "Choose the description by VALIDATION pass rate, not by the last iteration. Do not add keywords copied from failed queries (overfitting).",
+    "hard_limit": "description <= 1024 characters"
+  },
+  "queries": [
+    { "id": "p01", "split": "train", "should_trigger": true, "query": "Make this a better prompt: add tests to the login flow", "rationale": "Explicit 'better prompt' intent." },
+    { "id": "p02", "split": "train", "should_trigger": true, "query": "Ayúdame a refinar este prompt antes de dárselo al agente", "rationale": "Spanish trigger phrase; output must also be in Spanish." },
+    { "id": "p03", "split": "train", "should_trigger": true, "query": "I have a rough draft of a task description, polish it into something I can paste into Claude Code", "rationale": "Draft-to-prompt rewrite." },
+    { "id": "p04", "split": "train", "should_trigger": true, "query": "优化一下这个 prompt", "rationale": "Chinese trigger phrase." },
+    { "id": "p05", "split": "train", "should_trigger": true, "query": "boost this prompt por favor", "rationale": "Mixed-language + legacy 'boost' wording, typo tolerant." },
+    { "id": "p06", "split": "train", "should_trigger": true, "query": "Here's a half-formed idea: migrate the config to TOML. Turn it into a proper prompt.", "rationale": "Never says 'prompt' twice but wants a reusable prompt, not the work." },
+    { "id": "p07", "split": "validation", "should_trigger": true, "query": "What's the best way to ask an agent to refactor the API layer? Write me the prompt, don't do it.", "rationale": "Implicit trigger; explicit 'produce the prompt, not the implementation'." },
+    { "id": "p08", "split": "validation", "should_trigger": true, "query": "Can you review my draft prompt and rewrite it so it's unambiguous?", "rationale": "Draft feedback + rewrite." },
+    { "id": "p09", "split": "validation", "should_trigger": true, "query": "Quiero un prompt reutilizable para esta tarea, no la respuesta ahora", "rationale": "Reusable prompt vs. immediate answer." },
+    { "id": "p10", "split": "validation", "should_trigger": true, "query": "make this a beter prompt", "rationale": "Typo tolerance." },
+
+    { "id": "n01", "split": "train", "should_trigger": false, "query": "Optimize this code, it's too slow", "rationale": "NEAR-MISS: 'optimize' + code, but this is code optimisation, not prompt refinement." },
+    { "id": "n02", "split": "train", "should_trigger": false, "query": "Just do it — implement the login flow now", "rationale": "Explicit 'just do it' opt-out; user wants execution." },
+    { "id": "n03", "split": "train", "should_trigger": false, "query": "Refactor the parser module", "rationale": "Direct implementation request." },
+    { "id": "n04", "split": "train", "should_trigger": false, "query": "Optimize the performance of the database query", "rationale": "NEAR-MISS: performance optimisation." },
+    { "id": "n05", "split": "train", "should_trigger": false, "query": "Write the actual migration script", "rationale": "Wants code, not a prompt." },
+    { "id": "n06", "split": "train", "should_trigger": false, "query": "Fix the bug in auth.ts", "rationale": "Direct task execution." },
+    { "id": "n07", "split": "validation", "should_trigger": false, "query": "Explain what this prompt means", "rationale": "NEAR-MISS: about a prompt, but asks for explanation, not refinement." },
+    { "id": "n08", "split": "validation", "should_trigger": false, "query": "Run the tests", "rationale": "Tool action, no prompt work." },
+    { "id": "n09", "split": "validation", "should_trigger": false, "query": "Improve the README wording", "rationale": "NEAR-MISS: 'improve' + document, but prose editing, not a prompt." },
+    { "id": "n10", "split": "validation", "should_trigger": false, "query": "Generate a commit message", "rationale": "Content generation, not prompt refinement." }
+  ],
+  "output_quality_assertions": [
+    "The deliverable is a fenced markdown block containing a finished prompt.",
+    "Zero placeholders: no `[...]`, `{...}`, `<describe here>`, `___`, `TODO`, or `{{...}}` remain.",
+    "Every concrete path, module, or command is traceable to a repo read; inferences are labelled as assumptions.",
+    "The prompt contains Objective, Context, In-scope, Out-of-scope, Deliverables, Constraints, Acceptance criteria and Verification as applicable; inapplicable sections are omitted entirely, never left blank or marked N/A.",
+    "At most one clarification round occurred, and no question asked something the repo already answered.",
+    "No implementation action was taken on the project.",
+    "No editor-specific tool, extension, or clipboard command is required to receive the deliverable.",
+    "The response ends with a bounded revision offer and an explicit stop condition."
+  ]
+}
